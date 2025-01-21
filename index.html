@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefix-Suffix Matcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prefix-Suffix Matcher</h1>
+        <p>enter prefixes and suffixes separated by commas:</p>
+
+        <textarea id="prefixes" placeholder="Enter prefixes, e.g., pre,un,re"></textarea>
+        <textarea id="suffixes" placeholder="Enter suffixes, e.g., ed,ing,ly"></textarea>
+        <button onclick="generateCombinations()">Generate Combinations</button>
+
+        <div class="result" id="result">
+            <h2>Results:</h2>
+            <ul id="combinationList"></ul>
+        </div>
+    </div>
+
+    <script>
+        function generateCombinations() {
+            const prefixInput = document.getElementById('prefixes').value.trim();
+            const suffixInput = document.getElementById('suffixes').value.trim();
+
+            if (!prefixInput || !suffixInput) {
+                alert('Please enter both prefixes and suffixes.');
+                return;
+            }
+
+            const prefixes = prefixInput.split(',').map(item => item.trim());
+            const suffixes = suffixInput.split(',').map(item => item.trim());
+
+            const combinationList = document.getElementById('combinationList');
+            combinationList.innerHTML = '';
+
+            prefixes.forEach(prefix => {
+                suffixes.forEach(suffix => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = prefix + suffix;
+                    combinationList.appendChild(listItem);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
